@@ -3,6 +3,7 @@ import { Note } from "../Models/Note.js";
 import { loadState, saveState } from "../Utils/Store.js";
 
 
+
 function _saveNotes() {
   saveState(appState.userName, appState.notes)
   
@@ -33,7 +34,14 @@ class NotesService {
     
     appState.emit('notes')
   }
-
+  deleteNote(noteId) {
+    let noteToDelete = appState.notes.find(n => n.noteId == noteId)
+    console.log('delete service', noteToDelete)
+    
+    appState.notes = appState.notes.filter(n => n.noteId != noteId)
+    console.log('FIlter log');
+    _saveNotes()
+}
 
 }
 

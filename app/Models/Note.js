@@ -8,6 +8,7 @@ export class Note {
     this.noteName = data.noteName
     this.noteBody = data.noteBody || '';
     this.userName = appState.userName;
+    this.color = data.color;
     // 
   }
 
@@ -15,7 +16,7 @@ export class Note {
     
     return `
     <div class="col-4">
-      <p onclick="app.notesController.setActive('${this.noteId}')">Title-${this.noteName}</p>
+      <p onclick="app.notesController.setActive('${this.noteId}')">Title-${this.noteName} <button style="background-color: ${this.color};"></button></p>
       </div>`
     }
     // TODO Save data
@@ -23,6 +24,7 @@ export class Note {
       return `<form onsubmit="app.notesController.saveNoteBody()">
       <textarea type="text" id="noteBody" name="noteBody" class="w-100" cols="30" rows="15">${this.noteBody}</textarea>
       <button type= "submit">Save </button>
+      <button class="btn btn-danger" onclick="app.notesController.deleteNote('${this.noteId}')">Delete Note</button>
     </form>`
 
   }

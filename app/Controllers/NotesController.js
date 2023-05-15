@@ -1,8 +1,9 @@
 import { appState } from "../AppState.js";
 import { Note } from "../Models/Note.js";
-import { setHTML } from "../Utils/Writer.js";
+import { setHTML, setText } from "../Utils/Writer.js";
 import { getFormData } from "../Utils/FormHandler.js";
 import { notesService } from "../Services/NotesService.js";
+import { Pop } from "../Utils/Pop.js";
 
 function _drawNotes() {
   let notes = appState.notes
@@ -13,11 +14,14 @@ function _drawNotes() {
 
     template += n.NotesTemplate;
   })
+  console.log(appState.notes.length)
   // appState.notes.length
   setHTML('notesForm', template)
 
   setHTML('notesBody', appState.activeNote?.ActiveTemplate ?? '');
+  setHTML('noteCount', appState.notes.length)
 }
+
 
 
 
@@ -53,6 +57,11 @@ export class NotesController {
     notesService.saveNoteBody(formData.noteBody)
 
   }
-
+  async deleteNote(noteId) {
+    console.log('controller delete', noteId);
+    if (await Pop.confirm("Are you sure about that?")) {
+       notesService.deleteNote(noteId)
+    }
+}
 
 }

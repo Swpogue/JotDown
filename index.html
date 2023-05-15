@@ -32,6 +32,7 @@
       <div class="row" id="notesForm">
       </div>
       <div class="row" id="notesBody"></div>
+      <div class="row">Note Count: <span id="noteCount">0</span></div>
     </div>
 
 
@@ -42,6 +43,7 @@
         <form onsubmit="app.notesController.createNote()">
           <input type="text" name="noteName" id="noteName" required minlength="3" maxlength="12">
           <button type="submit">Create Note</button>
+          <input required type="color" class= "w-10 form-control" id="color" name="color" placeholder="">
         </form>
       </div>
 
